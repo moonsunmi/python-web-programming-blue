@@ -20,7 +20,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog:detail', args=(self.slug,))
+        return reverse('blog:post_detail', args=(self.slug,))
 
 #    previous, next object가 없을 때 어떻게 처리해야 할까?
 #    def get_previous(self):
