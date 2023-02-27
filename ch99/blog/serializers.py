@@ -1,4 +1,5 @@
 from rest_framework import serializers, status
+from taggit.serializers import TagListSerializerField, TaggitSerializer
 from .models import Post
 
 
@@ -10,14 +11,15 @@ class PostListSerializer(serializers.ModelSerializer):
         fields = ['title', 'slug', 'description', 'modify_dt']
 
 
-class PostDetailSerializer(serializers.ModelSerializer):
+class PostDetailSerializer(TaggitSerializer, serializers.ModelSerializer):
     """블로그 앱 포스트 하나의 디테일 시리얼라이저"""
     # previous_by_modify_dt = serializers.CharField(source='get_previous', read_only=True)
     # next_by_modify_dt = serializers.CharField(source='get_next', read_only=True)
     absolute_url = serializers.URLField(source='get_absolute_url', read_only=True)
+    tags = TagListSerializerField()
 
     class Meta:
         model = Post
         fields = ['id', 'title', 'slug', 'description', 'content',
-                  'modify_dt', 'create_dt', 'absolute_url']
+                  'modify_dt', 'create_dt', 'absolute_url', 'tags']
         # 'previous_by_modify_dt', 'next_by_modify_dt']

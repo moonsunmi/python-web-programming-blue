@@ -15,4 +15,6 @@ urlpatterns = [
     path('archive/<int:year>/<int:month>/<int:day>/',
          views.PostDayArchiveView.as_view(), name='post_month_archive'),
     path('archive/today/', views.PostTodayArchiveView.as_view(), name='post_today_archive'),
+    path('tag/', views.TagListView.as_view(), name='tag_list'),
+    path('tag/<str:tag>/', views.TaggedObjectView.as_view(), name='tagged_object_list'),
 ]

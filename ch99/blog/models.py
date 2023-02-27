@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from taggit.managers import TaggableManager
 
 
 class Post(models.Model):
@@ -9,6 +10,7 @@ class Post(models.Model):
     content = models.TextField('CONTENT')
     create_dt = models.DateTimeField('CREATE DATE', auto_now_add=True)  # 최초에만 now가 add.
     modify_dt = models.DateTimeField('MODIFY DATE', auto_now=True)  # 수정될 때마다 now가 변경되는 것
+    tags = TaggableManager(blank=True)
 
     class Meta:
         verbose_name = 'post'
